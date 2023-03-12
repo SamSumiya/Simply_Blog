@@ -1,34 +1,39 @@
-import React, { useState, useContext } from 'react'
-import {
+import React, { useState, useContext } from 'react';
+import
+{
   Box,
   IconButton,
   useTheme,
   useMediaQuery,
   Typography,
   Button,
-} from '@mui/material'
-import { DarkMode, LightMode } from '@mui/icons-material'
-import { colorTokens } from 'theme'
-import { useNavigate } from 'react-router-dom'
-import { ThemeContext } from 'App'
-import { Link } from 'react-router-dom'
+  AppBar,
+} from '@mui/material';
+import { DarkMode, LightMode } from '@mui/icons-material';
+import { colorTokens } from 'theme';
+import { useNavigate } from 'react-router-dom';
+import { ThemeContext } from 'App';
+import { Link } from 'react-router-dom';
 
-const Navbar = () => {
-  const { name } = useContext(ThemeContext)
-  const [darkTheme, setDarkTheme] = name
-  const { userInfo } = useContext(ThemeContext)
-  const [user, setUser] = userInfo
-  const token = '123'
-  const theme = useTheme()
-  const dark = theme.palette.primary.dark
-  const mediumMain = theme.palette.neutral.mediumMain
-  const yellow = colorTokens.lightMode.light
-  const isNonMobileScreens = useMediaQuery('(min-width: 1000px)')
-  const [isLogin] = useState(true)
-  const navigate = useNavigate()
+const pages = [ 'Write a post', 'All Authors', '' ];
+
+const Navbar = () =>
+{
+  const { name } = useContext( ThemeContext );
+  const [ darkTheme, setDarkTheme ] = name;
+  const { userInfo } = useContext( ThemeContext );
+  const [ user, setUser ] = userInfo;
+  const token = '123';
+  const theme = useTheme();
+  const dark = theme.palette.primary.dark;
+  const mediumMain = theme.palette.neutral.mediumMain;
+  const yellow = colorTokens.lightMode.light;
+  const isNonMobileScreens = useMediaQuery( '(min-width: 1000px)' );
+  const [ isLogin ] = useState( true );
+  const navigate = useNavigate();
 
   return (
-    <Box padding="1.7rem" width="100%">
+    <Box sx={{ marginTop: 2, marginBottom: 2 }} width="100%">
       <Box
         display="flex"
         justifyContent="center"
@@ -39,7 +44,7 @@ const Navbar = () => {
           fontSize="clamp(2rem, 3rem, 3.25rem)"
           fontWeight="bold"
           color="#3d5afe"
-          onClick={() => navigate('/')}
+          onClick={() => navigate( '/' )}
           sx={{
             '&:hover': {
               cursor: 'pointer',
@@ -50,7 +55,7 @@ const Navbar = () => {
         </Typography>
         <IconButton
           onClick={() =>
-            darkTheme === 'dark' ? setDarkTheme('light') : setDarkTheme('dark')
+            darkTheme === 'dark' ? setDarkTheme( 'light' ) : setDarkTheme( 'dark' )
           }
         >
           {darkTheme === 'dark' ? (
@@ -61,20 +66,20 @@ const Navbar = () => {
         </IconButton>
       </Box>
       {isNonMobileScreens ? (
-        <Box display="flex" justifyContent="space-evenly" mt="3rem">
-          <Box>
-            <Typography fontSize="1.2rem" fontWeight="bold" color={mediumMain}>
-              {user && user.user && user.user.firstName
-                ? `Hi, ${user.user.firstName}`
-                : 'Welcome to Simply Blog ❤️'}
-            </Typography>
-          </Box>
+        <AppBar sx={{ padding: 2 }} position="static" display="flex" justifyContent="space-evenly" mt="3rem">
           <Box display="flex" gap="3rem">
+            <Box sx={{ alignSelf: "center" }}>
+              <Typography fontSize="1.2rem" fontWeight="bold" color={mediumMain}>
+                {user && user.user && user.user.firstName
+                  ? `Hi, ${ user.user.firstName }`
+                  : 'Welcome to Simply Blog ❤️'}
+              </Typography>
+            </Box>
             {token && (
               <Button
                 sx={{ fontSize: '1.3rem', fontWeight: 'bold', color: dark }}
               >
-                {userInfo[0] && (
+                {userInfo[ 0 ] && (
                   <Box sx={{ textDecorationLine: 'none' }}>
                     <Link to="/create"> Create New Post </Link>
                   </Box>
@@ -82,11 +87,12 @@ const Navbar = () => {
               </Button>
             )}
             <Button sx={{ fontSize: '1.3rem', fontWeight: 'bold' }}>
-              {isLogin && userInfo[0] ? (
+              {isLogin && userInfo[ 0 ] ? (
                 <Link to="/login">
-                  <Box onClick={() => {
-                    setUser(null)
-                    localStorage.clear('user')
+                  <Box onClick={() =>
+                  {
+                    setUser( null );
+                    localStorage.clear( 'user' );
                   }}>Logout</Box>
                 </Link>
               ) : (
@@ -94,9 +100,9 @@ const Navbar = () => {
               )}
             </Button>
           </Box>
-        </Box>
+        </AppBar>
       ) : (
-        <Box
+        <AppBar
           display="flex"
           flexDirection="column"
           justifyContent="center"
@@ -112,10 +118,10 @@ const Navbar = () => {
           <Typography fontSize="1.3rem" sx={{ color: darkTheme }}>
             Login
           </Typography>
-        </Box>
+        </AppBar>
       )}
     </Box>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;
