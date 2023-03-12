@@ -71,10 +71,14 @@ const Navbar = () =>
             <Box sx={{ alignSelf: "center" }}>
               <Typography fontSize="1.2rem" fontWeight="bold" color={mediumMain}>
                 {user && user.user && user.user.firstName
+          
                   ? `Hi, ${ user.user.firstName }`
                   : 'Welcome to Simply Blog ❤️'}
               </Typography>
+
             </Box>
+                  <Button sx={{backgroundColor: "white"}}onClick={() =>  navigate(-1)}
+        > GO BACK</Button>
             {token && (
               <Button
                 sx={{ fontSize: '1.3rem', fontWeight: 'bold', color: dark }}
@@ -99,6 +103,7 @@ const Navbar = () =>
                 <Link to="/login">Login</Link>
               )}
             </Button>
+            
           </Box>
         </AppBar>
       ) : (

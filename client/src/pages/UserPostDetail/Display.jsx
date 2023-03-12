@@ -15,12 +15,14 @@ export const Display = () => {
   }, [postId])
 
   return (
-    <div>
-      <Button
-        onClick={() => navigate(-1)}
-      >
-        Go Back
-      </Button>
+    // <div>
+    //   <Button
+    //     onClick={() => navigate(-1)}
+    //   >
+    //     Go Back
+    //   </Button>
+    <Box>
+
       {
         data ? (  
           <Box>
@@ -30,11 +32,12 @@ export const Display = () => {
             Content: {data?.content} */}
           </Box>
           ) : (
-          <>
+            <>
             <a href="https://imgs.search.brave.com/GkpJGLJNA1amF2Ho76wl-g0JMPTFG9oTq8jiUUc2oqA/rs:fit:400:300:1/g:ce/aHR0cHM6Ly9jZG4u/ZHJpYmJibGUuY29t/L3VzZXJzLzk1ODcy/L3NjcmVlbnNob3Rz/LzEyMzc2MTgvc3Bp/bm5lcnMuZ2lm.gif" >fds</a>          </>  
           )
-      }
+        }
+        </Box>
     
-    </div>
+    // </div>
   )
 }

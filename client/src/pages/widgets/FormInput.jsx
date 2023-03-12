@@ -6,16 +6,14 @@ const FormInput = (props) => {
   const { placeholder, onChange, ...inputProps } = props
 
   return (
-    <FlexBetween>
-      <FlexBetween>
+
         <InputBase
           type="text"
           placeholder={placeholder}
           {...inputProps}
           onChange={onChange}
         />
-      </FlexBetween>
-    </FlexBetween>
+
   )
 }
 

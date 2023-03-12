@@ -114,26 +114,28 @@ export const MyPost = () => {
   }
 
   return (
-    <FlexBetween>
+    // <FlexBetween>
+
       <form action="" onSubmit={handleSubmit}>
         {formInputs.map((input) => (
           <FormInput
-            key={input.id}
-            {...input}
-            value={values[input.name]}
-            onChange={onChange}
+          key={input.id}
+          {...input}
+          value={values[input.name]}
+          onChange={onChange}
           />
-        ))}
+          ))}
         <ReactQuill
+        className="quill-class"
           value={content}
           modules={modules}
           formats={formats}
           onChange={(newValue) => setContent(newValue)}
-        ></ReactQuill>
+          ></ReactQuill>
         <Button type="submit" onClick={createNewPost}>
           Submit 
         </Button>
       </form>
-    </FlexBetween>
+    // </FlexBetween>
   )
 }
