@@ -77,7 +77,7 @@ const Navbar = () =>
               </Typography>
 
             </Box>
-                  <Button sx={{backgroundColor: "white"}}onClick={() =>  navigate(-1)}
+                  <Button variant="contained" sx={{backgroundColor: "white"}}onClick={() =>  navigate(-1)}
         > GO BACK</Button>
             {token && (
               <Button

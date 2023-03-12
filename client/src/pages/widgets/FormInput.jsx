@@ -1,5 +1,5 @@
 import React from 'react'
-import { InputBase } from '@mui/material'
+import { TextField } from '@mui/material'
 import { FlexBetween } from 'components/FlexBetween'
 
 const FormInput = (props) => {
@@ -7,7 +7,8 @@ const FormInput = (props) => {
 
   return (
 
-        <InputBase
+        <TextField
+          sx={{margin: 1}}
           type="text"
           placeholder={placeholder}
           {...inputProps}
@@ -18,3 +19,4 @@ const FormInput = (props) => {
 }
 
 export default FormInput
+ 
