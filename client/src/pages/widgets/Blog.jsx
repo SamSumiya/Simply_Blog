@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { blue } from '@mui/material/colors';
-import { useTheme, Box, Typography } from '@mui/material';
+
+import { useTheme, Box, Typography, Card } from '@mui/material';
 import { FlexBetween } from '../../components/FlexBetween';
 import { ThemeContext } from 'App';
 import { Link, useNavigate } from 'react-router-dom';
@@ -8,7 +9,8 @@ import { Image } from 'components/Image.jsx';
 import { TimeAgo } from 'pages/widgets/TimeAgo';
 import PostPage from 'pages/PostPage';
 import { fetchUserPosts } from 'utils/ToggleThemeProvider';
-// import { UserPost, UserPostList } from 'pages/userPostsList'
+import Grid from '@mui/material/Unstable_Grid2';
+
 
 const Blog = ( {
   userId,
@@ -25,17 +27,16 @@ const Blog = ( {
   const { palette } = useTheme();
   const { userInfo, userPosts } = useContext( ThemeContext );
   const navigate = useNavigate();
+  const medium = palette.neutral.medium;
   const primaryLight = palette.primary.light;
   const primaryDark = palette.primary.dark;
   const main = palette.neutral.main;
-  const medium = palette.neutral.medium;
+
   const [ posts, setPosts ] = userPosts;
-  // console.log(postId, 'PostID');
+
   const getUserPosts = async ( postId ) =>
   {
-
     setPosts( [] );
-
 
     const response = await fetch( `http://localhost:3002/users/post/${ postId }`, {
       method: 'GET',
@@ -45,15 +46,29 @@ const Blog = ( {
     navigate( '/posts/user' );
     setPosts( userPosts );
   };
-  // console.log(posts, 'what are my poostdsagf');
-  // console.log(postId, 'postId');
+
   return (
-    <FlexBetween>
-      <FlexBetween gap="5rem">
+    // <FlexBetween>
+    //   <FlexBetween gap="5rem">
+    <Grid
+      xs={12}
+      sm={6}
+      md={4}
+      lg={3}
+      xl={2}
+    >
+      <Card
+        sx={{
+          height: "100%",
+          width: "100%",
+          display: "flex",
+          justifyContent: "center",
+          padding: 2
+        }}>
+
         <Image />
         <Box>
           <Box
-
             onClick={() =>
             {
               getUserPosts( postId );
@@ -61,18 +76,13 @@ const Blog = ( {
               // navigate(`/posts/user/${userId}`)
             }}
             sx={{
-              cursor: "pointer",
-              textDecoration: "underline",
-              color: blue[ 200 ]
-
-
-
-            }}>
-            <Typography
-            >
-              Posted by{' '}
-              {' '}
-              {firstName} {lastName}{' '}
+              cursor: 'pointer',
+              textDecoration: 'underline',
+              color: blue[ 200 ],
+            }}
+          >
+            <Typography>
+              Posted by {firstName} {lastName}{' '}
             </Typography>
           </Box>
           <Typography
@@ -103,8 +113,10 @@ const Blog = ( {
           <TimeAgo timestamp={updatedAt} />
           {/* </Typography> */}
         </Box>
-      </FlexBetween>
-    </FlexBetween>
+        {/* //   </FlexBetween> */}
+        {/* // </FlexBetween> */}
+      </Card>
+    </Grid>
   );
 };
 

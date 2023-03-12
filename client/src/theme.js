@@ -12,7 +12,7 @@ export const colorTokens = {
     700: '#333333',
     800: '#1A1A1A',
     900: '#0A0A0A',
-    
+
     1000: '#000000',
   },
   primary: {
@@ -27,16 +27,25 @@ export const colorTokens = {
     800: '#00353F',
     900: '#001519',
   },
-	lightMode:{
-		light: '#FFBF00',
-	}
+  lightMode: {
+    light: '#FFBF00',
+  },
 }
 
 //  Mui Theme Settings
 export const themeSettings = (mode) => {
   return {
+    breakpoints: {
+      values: {
+        xs: 0,
+        sm: 600,
+        md: 1300,
+        lg: 1650,
+        xl: 2200,
+      },
+    },
     palette: {
-      ...(mode === 'dark')
+      ...(mode === 'dark'
         ? {
             // palette values for dark mode
             primary: {
@@ -74,7 +83,7 @@ export const themeSettings = (mode) => {
               default: colorTokens.grey[10],
               alt: colorTokens.grey[0],
             },
-      }
+          }),
     },
   }
 }
