@@ -4,6 +4,7 @@ import {
   Button,
   TextField,
   useMediaQuery,
+  Card,
   Typography,
   useTheme,
 } from '@mui/material'
@@ -114,26 +115,34 @@ export const MyPost = () => {
   }
 
   return (
-    <FlexBetween>
-      <form action="" onSubmit={handleSubmit}>
+    // <FlexBetween>
+    <Card sx={{height: "100%", padding: 4}}>
+
+
+      <form className="submit-form" action="" onSubmit={handleSubmit}>
         {formInputs.map((input) => (
           <FormInput
-            key={input.id}
-            {...input}
-            value={values[input.name]}
-            onChange={onChange}
+          key={input.id}
+          {...input}
+          value={values[input.name]}
+          onChange={onChange}
           />
-        ))}
+          ))}
+          <Box sx={{height: "100%"}}>
+
         <ReactQuill
-          value={content}
-          modules={modules}
-          formats={formats}
-          onChange={(newValue) => setContent(newValue)}
+        className="quill-class"
+        value={content}
+        modules={modules}
+        formats={formats}
+        onChange={(newValue) => setContent(newValue)}
         ></ReactQuill>
-        <Button type="submit" onClick={createNewPost}>
+        </Box>
+        <Button variant="contained" sx={{width: "8rem", display: "flex", justifySelf: "center"}}type="submit" onClick={createNewPost}>
           Submit 
         </Button>
       </form>
-    </FlexBetween>
+      </Card>
+    // </FlexBetween>
   )
 }

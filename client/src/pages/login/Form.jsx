@@ -55,6 +55,7 @@ export const Form = () => {
     for (let value in values) {
       formData.append(value, values[value])
     }
+    // no error is present for a picture not being added. The error message in the console isn't cler because we get acnnot read property of undefined (name)
 
     formData.append('picturePath', values.picture.name)
 

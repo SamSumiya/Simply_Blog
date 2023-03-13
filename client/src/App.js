@@ -14,7 +14,7 @@ import {
 import Login from "pages/login";
 import { NewPost } from "pages/newPost";
 import NotFound from "pages/notfound/NotFound";
-import PostPage from "pages/PostPage";
+// import PostPage from "pages/PostPage";
 import BlogWidget from "pages/widgets/BlogWidget";
 import { BlogsWidget } from "pages/widgets/BlogsWidget";
 import Blog from "pages/widgets/Blog";
@@ -70,7 +70,7 @@ function App() {
                 element={
                   JSON.parse(localStorage.getItem("user")) &&
                   JSON.parse(localStorage.getItem("user")).token ? (
-                    <PostPage />
+                    <Display />
                   ) : (
                     <Navigate to="/login" />
                   )
