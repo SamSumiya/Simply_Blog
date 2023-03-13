@@ -36,6 +36,26 @@ export const fetchPost = async(id) => {
 }
 
 
+export const deletePost = async(id) => {
+
+try {
+
+  const response = await fetch(`${BASE_URL}/${id}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+  const data = await response.json()
+  return data
+  
+}
+catch (error) {
+  console.log("ERROR", error)  
+}
+
+}
+
 export const fetchUserPosts = async(userId) =>{
   const response = await fetch(`${BASE_URL}/user/${userId}`)
   const data = await response.json()

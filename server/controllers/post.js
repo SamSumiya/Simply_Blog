@@ -36,8 +36,8 @@ export const getAllPosts = async (req, res) => {
 export const getPost = async (req, res) => {
   try {
     const { postId } = req.params;
-    const postData = await Post.findById(postId);
-    res.status(201).json(postData);
+    const response = await Post.findById(postId);
+    res.status(201).json(response);
   } catch (error) {
     res.status(409).json({ message: error.message });
   }
@@ -52,3 +52,14 @@ export const getUserPosts = async (req, res) => {
     res.status(409).json({ message: error.message });
   }
 };
+
+export const deletePost = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const deletePost = await Post.deleteOne({_id :id});
+    res.status(201).json(deletePost);
+  } catch (error) {
+    res.status(409).json({ message: error.message });
+  }
+}
