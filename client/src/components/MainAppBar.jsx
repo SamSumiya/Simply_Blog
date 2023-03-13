@@ -5,9 +5,9 @@ import React, { useState, useContext } from 'react';
 import { ThemeContext } from 'App';
 
 const MainAppBar = () => {
-  const token = '123';
   const { userInfo } = useContext( ThemeContext );
-
+  const [ token ] = userInfo
+  
   const [ isLogin ] = useState( true );
   const [ user, setUser ] = userInfo;
   const navigate = useNavigate();
@@ -30,14 +30,15 @@ const MainAppBar = () => {
               : "Welcome to Simply Blog ❤️"}
           </Typography>
         </Box>
-        <Button
+      {  token?.token ?   <Button
           variant="contained"
           sx={{ backgroundColor: "white" }}
           onClick={() => navigate(-1)}
         >
           {" "}
-          GO BACK
-        </Button>
+        GO BACK
+        </Button> : undefined}
+      
         {token && (
           <Button sx={{ fontSize: "1.3rem", fontWeight: "bold", color: dark }}>
             {userInfo[0] && (
