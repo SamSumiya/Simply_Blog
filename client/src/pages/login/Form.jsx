@@ -222,14 +222,13 @@ export const Form = () => {
               </>
             )}
             {isLogin && (
-              <motion.div
-              >
+              // <motion.div>
                 <Box
                   id="error"
                   sx={{ color: 'white', backgroundColor: 'red', width: '46%' }}
                   gridColumn="span 5"
                 ></Box>
-              </motion.div>
+              // </motion.div>
             )}
             <TextField
               label="Email"
