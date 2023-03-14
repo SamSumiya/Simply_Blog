@@ -89,6 +89,11 @@ export const Form = () => {
     }
   }
 
+  const displayError = () => {
+    const el = document.getElementById('error')
+    el.innerHTML = 'Email or password is invalid , please try again.'
+  }
+
   const login = async (values, onSubmitProps) => {
     const loggedInRespose = await fetch('http://localhost:3002/auth/login', {
       method: 'POST',
@@ -106,7 +111,7 @@ export const Form = () => {
       })
       navigate('/')
     } else {
-      document.getElementsById('error').innerText =' something went wrong'
+      displayError() 
       navigate('/login')
     }
   }
@@ -198,7 +203,7 @@ export const Form = () => {
                 </Box>
               </>
             )}
-            <Box id='error'></Box>
+            <Box id='error' sx={{ color: 'red'}} gridColumn='span 6'></Box>
             <TextField
               label="Email"
               onBlur={handleBlur}
@@ -220,7 +225,6 @@ export const Form = () => {
               helperText={touched.password && errors.password}
               sx={{ gridColumn: 'span 4' }}
             />
-            {console.log(values, isRegister)}
             {isRegister && (
               <>
                 <TextField
