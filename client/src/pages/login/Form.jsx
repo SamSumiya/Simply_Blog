@@ -13,13 +13,14 @@ import { useNavigate } from 'react-router-dom'
 import { FlexBetween } from 'components/FlexBetween'
 import { ThemeContext } from 'App'
 import Dropzone from 'react-dropzone'
-import { EditOutlined } from '@mui/icons-material'
+import { EditOutlined, ErrorRounded } from '@mui/icons-material'
 
 const initialValueRegister = {
   firstName: '',
   lastName: '',
   email: '',
   password: '',
+  confirmPassword: '',
 }
 
 const initialValueLogin = {
@@ -31,7 +32,8 @@ const registerSchema = yup.object().shape({
   firstName: yup.string().required('required'),
   lastName: yup.string().required('required'),
   email: yup.string().email('Invalud Email').required('required'),
-  password: yup.string().required('required'),
+  password: yup.string().required('required').min(4, 'Must be longer than 3'),
+  confirmPassword: yup.string().oneOf([yup.ref('password'), null], 'Passwords must match').min(4, 'Must be longer than 3')
 })
 
 const loginSchema = yup.object().shape({
@@ -49,17 +51,23 @@ export const Form = () => {
   const isLogin = pageType === 'login'
   const isRegister = pageType === 'register'
 
-  const register = async (values, onSubmitProps) => {
+  const comparePasswords = (value) => {
+    const { password, confirmPassword } = value
 
+    if (password !== confirmPassword) {
+      throw new Error('Do not match...')
+    }
+  }
+
+  const register = async (values, onSubmitProps) => {
     const formData = new FormData()
     for (let value in values) {
       formData.append(value, values[value])
     }
-    // no error is present for a picture not being added. The error message in the console isn't cler because we get acnnot read property of undefined (name)
+    // no error is present for a picture not being added. The error message in the console isn't cler because we get acnnot read property of undefined (name) 
 
-    formData.append('picturePath', values.picture.name)
-
-    console.log(Object.fromEntries(formData));
+    // this comes from values, when we don't have picture, values.picture is null, so we can do .name
+    formData.append('picturePath', values.picture? values.picture.name : '')
 
     const savedUserResponse = await fetch(
       'http://localhost:3002/auth/register',
@@ -69,7 +77,7 @@ export const Form = () => {
         // },
         method: 'POST',
         // body: JSON.stringify(values),
-        body: formData, 
+        body: formData,
       },
     )
 
@@ -98,6 +106,7 @@ export const Form = () => {
       })
       navigate('/')
     } else {
+      document.getElementsById('error').innerText =' something went wrong'
       navigate('/login')
     }
   }
@@ -189,6 +198,7 @@ export const Form = () => {
                 </Box>
               </>
             )}
+            <Box id='error'></Box>
             <TextField
               label="Email"
               onBlur={handleBlur}
@@ -210,6 +220,24 @@ export const Form = () => {
               helperText={touched.password && errors.password}
               sx={{ gridColumn: 'span 4' }}
             />
+            {console.log(values, isRegister)}
+            {isRegister && (
+              <>
+                <TextField
+                  label="confirm Password"
+                  type="password"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  value={values.confirmPassword}
+                  name="confirmPassword"
+                  error={
+                    Boolean(errors.confirmPassword)
+                  }
+                  helperText={touched.confirmPassword && errors.confirmPassword}
+                  sx={{ gridColumn: 'span 4' }}
+                />
+              </>
+            )}
           </Box>
           <Button
             fullWidth

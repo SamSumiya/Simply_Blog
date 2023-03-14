@@ -22,8 +22,13 @@ const UserSchema = new Schema({
 	password: {
 		type: String,
 		required: true, 
-		min: 3
+		min: [5, 'must be greater than 5']
 	}, 
+	confirmPassword: {
+		type: String, 
+		required: true, 
+		min: [5, 'must be greater than 5']
+	},
 	picturePath: { 
 		type: String,
 		default: '' 
