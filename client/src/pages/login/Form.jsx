@@ -14,6 +14,7 @@ import { FlexBetween } from 'components/FlexBetween'
 import { ThemeContext } from 'App'
 import Dropzone from 'react-dropzone'
 import { EditOutlined } from '@mui/icons-material'
+import { motion } from 'framer-motion'
 
 const initialValueRegister = {
   firstName: '',
@@ -37,7 +38,7 @@ const registerSchema = yup.object().shape({
     .string()
     .oneOf([yup.ref('password'), null], 'Passwords must match')
     .min(4, 'Must be longer than 3')
-    .required('required')
+    .required('required'),
 })
 
 const loginSchema = yup.object().shape({
@@ -55,13 +56,13 @@ export const Form = () => {
   const isLogin = pageType === 'login'
   const isRegister = pageType === 'register'
 
-  const comparePasswords = (value) => {
-    const { password, confirmPassword } = value
+  // const comparePasswords = (value) => {
+  //   const { password, confirmPassword } = value
 
-    if (password !== confirmPassword) {
-      throw new Error('Do not match...')
-    }
-  }
+  //   if (password !== confirmPassword) {
+  //     throw new Error('Do not match...')
+  //   }
+  // }
 
   const register = async (values, onSubmitProps) => {
     const formData = new FormData()
@@ -95,9 +96,20 @@ export const Form = () => {
 
   const displayError = () => {
     const el = document.getElementById('error')
+    el.innerHTML = ''
+    el.style.padding = '0'
+  }
+
+  const displayErrorMessage = () => {
+    const el = document.getElementById('error')
     el.innerHTML = 'Email or password is invalid , please try again.'
     el.style.padding = '.7rem'
     el.style.fontWeight = 'bold'
+  }
+
+  const delayedDisplayError = () => {
+    displayErrorMessage()
+    setTimeout(displayError, 2000)
   }
 
   const login = async (values, onSubmitProps) => {
@@ -117,7 +129,7 @@ export const Form = () => {
       })
       navigate('/')
     } else {
-      displayError()
+      delayedDisplayError()
       navigate('/login')
     }
   }
@@ -210,7 +222,14 @@ export const Form = () => {
               </>
             )}
             {isLogin && (
-              <Box id="error" sx={{ color: 'white', backgroundColor: 'red', width:'46%'}} gridColumn="span 5"></Box>
+              <motion.div
+              >
+                <Box
+                  id="error"
+                  sx={{ color: 'white', backgroundColor: 'red', width: '46%' }}
+                  gridColumn="span 5"
+                ></Box>
+              </motion.div>
             )}
             <TextField
               label="Email"
