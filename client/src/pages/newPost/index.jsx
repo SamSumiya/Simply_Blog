@@ -12,8 +12,6 @@ export const NewPost = () => {
   return (
     <Box>
       <Navbar />
-      {/* <Button onClick={() =>  navigate(-1)}
-        > GO BACK</Button> */}
 			<Divider sx={{ margin: '1.25rem 0' }}/>
       <Box width="100%" display="flex" justifyContent="center" ml='10px'>
         <Box  sx={{width: (isNonMobileScreens ? "80%" : "63%"), height: "calc(80vh - 200px)"}} >

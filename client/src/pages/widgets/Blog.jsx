@@ -31,13 +31,13 @@ const Blog = ( {
   const primaryLight = palette.primary.light;
   const primaryDark = palette.primary.dark;
   const main = palette.neutral.main;
+  const theme = useTheme()
 
   const [ posts, setPosts ] = userPosts;
 
   const getUserPosts = async ( postId ) =>
   {
     setPosts( [] );
-
     const response = await fetch( `http://localhost:3002/users/post/${ postId }`, {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' },
@@ -53,9 +53,9 @@ const Blog = ( {
     <Grid
       xs={12}
       sm={6}
-      md={4}
-      lg={3}
-      xl={2}
+      md={6}
+      lg={4}
+      xl={6}
     >
       <Card
         sx={{
@@ -63,7 +63,8 @@ const Blog = ( {
           width: "100%",
           display: "flex",
           justifyContent: "center",
-          padding: 2
+          padding: 2,
+          backgroundColor: theme.palette.background.alt,
         }}>
 
         <Image />
@@ -110,7 +111,7 @@ const Blog = ( {
           {/* <PostPage content={content} postId={postId} /> */}
 
           {/* <Typography color={medium} fontSize="0.75rem"> */}
-          <TimeAgo timestamp={updatedAt} />
+          <TimeAgo timestamp={updatedAt} sx={{backgroundColor: theme.palette.background.alt}}/>
           {/* </Typography> */}
         </Box>
         {/* //   </FlexBetween> */}
