@@ -236,7 +236,7 @@ export const Form = () => {
             {isRegister && (
               <>
                 <TextField
-                  label="confirm Password"
+                  label="Confirm Password"
                   type="password"
                   onBlur={handleBlur}
                   onChange={handleChange}
