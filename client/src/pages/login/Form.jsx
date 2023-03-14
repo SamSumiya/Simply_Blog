@@ -96,6 +96,8 @@ export const Form = () => {
   const displayError = () => {
     const el = document.getElementById('error')
     el.innerHTML = 'Email or password is invalid , please try again.'
+    el.style.padding = '.7rem'
+    el.style.fontWeight = 'bold'
   }
 
   const login = async (values, onSubmitProps) => {
@@ -208,7 +210,7 @@ export const Form = () => {
               </>
             )}
             {isLogin && (
-              <Box id="error" sx={{ color: 'red' }} gridColumn="span 6"></Box>
+              <Box id="error" sx={{ color: 'white', backgroundColor: 'red', width:'46%'}} gridColumn="span 5"></Box>
             )}
             <TextField
               label="Email"
