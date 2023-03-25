@@ -79,17 +79,16 @@ export const MyPost = () => {
       pattern: '^[A-Za-z0-9]{10,100}$',
       required: true,
     },
-    // {
-    //   id: 3,
-    //   type: 'text',
-    //   name: 'content',
-    //   placeholder: 'Content',
-    //   required: true,
-    // },
   ]
 
   const createNewPost = async () => {
-    const updatedValues = { userId: user._id, ...values, content: content, firstName: user.firstName, lastName: user.lastName }
+    const updatedValues = {
+      userId: user._id,
+      ...values,
+      content: content,
+      firstName: user.firstName,
+      lastName: user.lastName,
+    }
     const data = new FormData()
     data.set('title', values.title)
     data.set('summary', values.summary)
@@ -115,34 +114,36 @@ export const MyPost = () => {
   }
 
   return (
-    // <FlexBetween>
-    <Card sx={{height: "100%", padding: 4}}>
-
-
+    <Card sx={{ height: '100%', padding: 3, overflow: 'auto',  overflowX: 'hidden'}}>
       <form className="submit-form" action="" onSubmit={handleSubmit}>
         {formInputs.map((input) => (
           <FormInput
-          key={input.id}
-          {...input}
-          value={values[input.name]}
-          onChange={onChange}
+            key={input.id}
+            {...input}
+            value={values[input.name]}
+            onChange={onChange}
           />
-          ))}
-          <Box sx={{height: "100%"}}>
-
-        <ReactQuill
-        className="quill-class"
-        value={content}
-        modules={modules}
-        formats={formats}
-        onChange={(newValue) => setContent(newValue)}
-        ></ReactQuill>
-        </Box>
-        <Button variant="contained" sx={{width: "8rem", display: "flex", justifySelf: "center"}}type="submit" onClick={createNewPost}>
-          Submit 
-        </Button>
+        ))}
+        <Box sx={{ height: '100vh' }}>
+          <ReactQuill
+            className="quill-class"
+            value={content}
+            modules={modules}
+            formats={formats}
+            onChange={(newValue) => setContent(newValue)}
+          ></ReactQuill>
+        </Box >
+        <Box>
+          <Button
+            variant="contained"
+            sx={{ width: '8rem', display: 'flex', justifySelf: 'center', mb:'1.6rem'}}
+            type="submit"
+            onClick={createNewPost}
+          >
+            Submit
+          </Button>
+          </Box>
       </form>
-      </Card>
-    // </FlexBetween>
+    </Card>
   )
 }
