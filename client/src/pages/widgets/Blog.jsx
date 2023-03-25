@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { blue } from '@mui/material/colors';
 
-import { useTheme, Box, Typography, Card } from '@mui/material';
+import { useTheme, Box, Typography, Card , Stack} from '@mui/material';
 import { FlexBetween } from '../../components/FlexBetween';
 import { ThemeContext } from 'App';
 import { Link, useNavigate } from 'react-router-dom';
@@ -50,12 +50,8 @@ const Blog = ( {
   return (
     // <FlexBetween>
     //   <FlexBetween gap="5rem">
-    <Grid
-      xs={12}
-      sm={6}
-      md={6}
-      lg={4}
-      xl={6}
+    <Stack
+
     >
       <Card
         sx={{
@@ -117,7 +113,7 @@ const Blog = ( {
         {/* //   </FlexBetween> */}
         {/* // </FlexBetween> */}
       </Card>
-    </Grid>
+    </Stack>
   );
 };
 

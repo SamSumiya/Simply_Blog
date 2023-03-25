@@ -23,25 +23,24 @@ const MainAppBar = () => {
       mt="3rem"
     >
       <Box display="flex" gap="3rem">
-        <Box sx={{ alignSelf: 'center' }}>
+        {/* <Box sx={{ alignSelf: 'center' }}>
           <Typography fontSize="1.2rem" fontWeight="bold" color={mediumMain}>
             {user && user.user && user.user.firstName
               ? `Hi, ${user.user.firstName}`
               : 'Welcome to Simply Blog ❤️'}
           </Typography>
-        </Box>
+        </Box> */}
         {token?.token && location.pathname !== '/' ? (
           <Button
             variant="contained"
             sx={{ backgroundColor: 'white' }}
             onClick={() => navigate(-1)}
           >
-            {' '}
             GO BACK
           </Button>
         ) : undefined}
 
-        {token && (
+        {/* {token && (
           <Button sx={{ fontSize: '1.3rem', fontWeight: 'bold', color: dark }}>
             {userInfo[0] && (
               <Box sx={{ textDecorationLine: 'none' }}>
@@ -49,8 +48,8 @@ const MainAppBar = () => {
               </Box>
             )}
           </Button>
-        )}
-        <Button sx={{ fontSize: '1.3rem', fontWeight: 'bold' }}>
+        )} */}
+        {/* <Button sx={{ fontSize: '1.3rem', fontWeight: 'bold' }}>
           {isLogin && userInfo[0] ? (
             <Link to="/login">
               <Box
@@ -65,7 +64,7 @@ const MainAppBar = () => {
           ) : (
             <Link to="/login">Login</Link>
           )}
-        </Button>
+        </Button> */}
       </Box>
     </AppBar>
   )
