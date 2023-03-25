@@ -10,7 +10,7 @@ const Login = () => {
 
   return (
     <Box>
-      <Box
+      {/* <Box
         width="100%"
         backgroundColor={theme.palette.background.alt}
         p="1rem 6%"
@@ -29,7 +29,7 @@ const Login = () => {
         >
           Simply Blog
         </Typography>
-      </Box>
+      </Box> */}
       <Box
         width={isNonMobileScreens ? '50%' : '93%'}
         padding="2rem"
